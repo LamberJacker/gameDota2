@@ -1,0 +1,7 @@
+G:\3. ITEA\С#_Basse\GameCode\GameDota2\GameDota2\obj\Debug\GameDota2.csprojAssemblyReference.cache
+G:\3. ITEA\С#_Basse\GameCode\GameDota2\GameDota2\obj\Debug\GameDota2.csproj.CoreCompileInputs.cache
+G:\3. ITEA\С#_Basse\GameCode\GameDota2\GameDota2\bin\Debug\GameDota2.exe.config
+G:\3. ITEA\С#_Basse\GameCode\GameDota2\GameDota2\bin\Debug\GameDota2.exe
+G:\3. ITEA\С#_Basse\GameCode\GameDota2\GameDota2\bin\Debug\GameDota2.pdb
+G:\3. ITEA\С#_Basse\GameCode\GameDota2\GameDota2\obj\Debug\GameDota2.exe
+G:\3. ITEA\С#_Basse\GameCode\GameDota2\GameDota2\obj\Debug\GameDota2.pdb
