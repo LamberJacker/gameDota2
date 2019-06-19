@@ -149,42 +149,42 @@ namespace GameLegueOfLegend
         public void addItem(Hero hero)
         {
             Random rnd = new Random();
-            for (int i = 0; i < 2; i++)
+            for (int j = 0; j < 2; j++)
             {
-                int rndHero = rnd.Next(1, 5);
-                switch (rndHero)
+                int rndItem = rnd.Next(1, 5);
+                switch (rndItem)
                 {
                     case 1:
                         Sword sword = new Sword();
-                        arritems[i] = sword;
+                        hero.arritems[j] = sword;
                         hero.agility += sword.getAgilityItem();
                         hero.strength += sword.getStrengthItem();
                         hero.intellect += sword.getIntellctItem();
                         break;
                     case 2:
                         Bow bow = new Bow();
-                        arritems[i] = bow;
+                        hero.arritems[j] = bow;
                         hero.agility += bow.getAgilityItem();
                         hero.strength += bow.getStrengthItem();
                         hero.intellect += bow.getIntellctItem();
                         break;
                     case 3:
                         Staff staff = new Staff();
-                        arritems[i] = staff;
+                        hero.arritems[j] = staff;
                         hero.agility += staff.getAgilityItem();
                         hero.strength += staff.getStrengthItem();
                         hero.intellect += staff.getIntellctItem();
                         break;
                     case 4:
                         Shield shield = new Shield();
-                        arritems[i] = shield;
+                        hero.arritems[j] = shield;
                         hero.agility += shield.getAgilityItem();
                         hero.strength += shield.getStrengthItem();
                         hero.intellect += shield.getIntellctItem();
                         break;
                     case 5:
                         EmptySlot empty = new EmptySlot();
-                        arritems[i] = empty;
+                        hero.arritems[j] = empty;
                         break;
                 }
             }
@@ -332,18 +332,15 @@ namespace GameLegueOfLegend
             do
             {
                 Console.Clear();
-                Console.WriteLine("Что бы начать игру напиши \"s\", для выхода нажми \"q\"");
+                Console.WriteLine("Что бы начать игру напиши \"GO\", для выхода напиши \"OFF\"");
                 string inputFromUser = Console.ReadLine();
                 switch (inputFromUser)
                 {
-                    case "s":
+                    case "GO":
                         new Game();
                         break;
-                    case "q":
+                    case "OFF":
                         check = false;
-                        break;
-                    default:
-                        Console.WriteLine("Пиши то что хочу Я! А не то что ты сам себе придумываешь!");
                         break;
                 }
             } while (check == true);
