@@ -17,51 +17,93 @@ namespace GameLegueOfLegend
             Console.WriteLine("Да начнеться битва...");
             Console.ResetColor();
             Boolean flag = true;
-            Hero firstHero = new Hero();
-            Hero secondHero = new Hero();
+            Hero[] arrheroes = new Hero[2];
+            Random rnd = new Random();
+            for (int i = 0; i < 2; i++)            
+            {
+                int rndHero = rnd.Next(1, 5);
+                switch (rndHero)
+                {
+                case 1:
+                    Teemo teemo = new Teemo();
+                    teemo.addItem(teemo);
+                    arrheroes[i] = teemo;
+                    break;
+                case 2:
+                    Draven draven = new Draven();
+                    draven.addItem(draven);
+                    arrheroes[i] = draven;
+                    break;
+                case 3:
+                    Brand brand = new Brand();
+                    brand.addItem(brand);
+                    arrheroes[i] = brand;
+                    break;
+                case 4:
+                    Darius darius = new Darius();
+                    darius.addItem(darius);
+                    arrheroes[i] = darius;
+                    break;
+                case 5:
+                    Kayle kayle = new Kayle();
+                    kayle.addItem(kayle);
+                    arrheroes[i] = kayle;
+                    break;
+                }
+            }
             int turn = 0;
+            Console.WriteLine("На арену выходят два чемпиона :");
+            Console.WriteLine("......................................\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Первый ");
+            arrheroes[0].getAllInfo();
+            Console.WriteLine("--------------------------------------\n");
+            Console.Write("Второй ");
+            arrheroes[1].getAllInfo();
+            Console.ResetColor();
+            Console.WriteLine("\n======================================");
+            Console.WriteLine("           БОЙ НАЧИНАЕТЬСЯ!");
+            Console.WriteLine("======================================\n");
             do
             {
-              Console.WriteLine("Герой #1 " + firstHero.getInfo());
-              Console.WriteLine("Герой #2 " + secondHero.getInfo());
-              System.Threading.Thread.Sleep(1000);  
-              if (firstHero.getHP() <= 0D)
-              {
+                Console.WriteLine("Герой #1 " + arrheroes[0].getInfo());
+                Console.WriteLine("Герой #2 " + arrheroes[1].getInfo());
+                Console.WriteLine("--------------------------------------\n");
+                System.Threading.Thread.Sleep(1000);  
+                if (arrheroes[0].getHP() <= 0D)
+                {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Вот он лузер! {0} умирает!", firstHero.getName());
+                Console.WriteLine("Вот он лузер! {0} умирает!", arrheroes[0].getName());
                 Console.ResetColor();
                 flag = false;
-              }
-              else if (secondHero.getHP() <= 0D)
-              {
+                }
+                else if (arrheroes[1].getHP() <= 0D)
+                {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Вот он лузер! {0} умирает!", secondHero.getName());
+                Console.WriteLine("Вот он лузер! {0} умирает!", arrheroes[1].getName());
                 Console.ResetColor();
                 flag = false;
-              }
-              else if (turn%2 == 0)
-              {
+                }
+                else if (turn%2 == 0)
+                {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Бьет герой #1 : {0}, и наносит {1} урона!", firstHero.getName(), firstHero.getStrikepower());
-                secondHero.setHP(secondHero.getHP()-firstHero.getStrikepower());
+                Console.WriteLine("Бьет герой #1 : {0}, и наносит {1:#.##} урона!", arrheroes[0].getName(), arrheroes[0].getStrikepower());
+                arrheroes[1].setHP(arrheroes[1].getHP()-arrheroes[0].getStrikepower());
                 Console.ResetColor();
                 turn++;
-              }
-              else
-              {
+                }
+                else
+                {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Бьет герой #2 : {0}, и наносит {1} урона!", secondHero.getName(), secondHero.getStrikepower());
-                firstHero.setHP(firstHero.getHP()-secondHero.getStrikepower());
+                Console.WriteLine("Бьет герой #2 : {0}, и наносит {1:#.##} урона!", arrheroes[1].getName(), arrheroes[1].getStrikepower());
+                arrheroes[0].setHP(arrheroes[0].getHP()-arrheroes[1].getStrikepower());
                 Console.ResetColor();
                 turn++;
-              }
+                }
             } while (flag == true);
+            Console.WriteLine("\nБитва оконченна, но ты можешь узреть еще легендарный бой,\n жми на любую кнопку что бы продолжить...");
+            Console.ReadKey();
         }
-        //private void getInfoHero()
-        //{
-        //    firstHero.getInfo;
-        //    secondHero.getInfo;
-        //}
     }
     class Hero
     {
@@ -71,28 +113,22 @@ namespace GameLegueOfLegend
         protected double intellect;
         protected double agility;
         protected double strength;
-        //private Item[] items = new Item[2];
-
-        public Hero()
-        {
-            Random rnd = new Random();
-            int rndHero = rnd.Next(1, 3);
-            switch (rndHero)
-            {
-                case 1:
-                    new Teemo();
-                    break;
-                case 2:
-                    new Draven();
-                    break;
-                case 3:
-                    new Brand();
-                    break;
-            }
-        }
+        private Item[] arritems = new Item[2];
         public String getInfo()
         {
-            return name + " : " + "Здоровье: " + health + ", Интеллект: " + intellect + ", Ловкость: " + agility;
+            return name + " : " + Math.Round(health) + " HP";
+        }
+        public void getAllInfo()
+        {
+            Console.WriteLine("герой : " + name);
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Характеристики героя: \nЗдоровье : " + health + " HP \nИнтелект: " + intellect);
+            Console.WriteLine("Ловкость : " + agility + "\nСила : " + strength);
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Сила одного удара равна : " + strikepower);
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("В левой руке у него : " + arritems[0].getNameItem());
+            Console.WriteLine("В правой руке у него : " + arritems[1].getNameItem());
         }
         public double getHP()
         {
@@ -109,6 +145,49 @@ namespace GameLegueOfLegend
         public String getName()
         {
             return name;
+        }
+        public void addItem(Hero hero)
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 2; i++)
+            {
+                int rndHero = rnd.Next(1, 5);
+                switch (rndHero)
+                {
+                    case 1:
+                        Sword sword = new Sword();
+                        arritems[i] = sword;
+                        hero.agility += sword.getAgilityItem();
+                        hero.strength += sword.getStrengthItem();
+                        hero.intellect += sword.getIntellctItem();
+                        break;
+                    case 2:
+                        Bow bow = new Bow();
+                        arritems[i] = bow;
+                        hero.agility += bow.getAgilityItem();
+                        hero.strength += bow.getStrengthItem();
+                        hero.intellect += bow.getIntellctItem();
+                        break;
+                    case 3:
+                        Staff staff = new Staff();
+                        arritems[i] = staff;
+                        hero.agility += staff.getAgilityItem();
+                        hero.strength += staff.getStrengthItem();
+                        hero.intellect += staff.getIntellctItem();
+                        break;
+                    case 4:
+                        Shield shield = new Shield();
+                        arritems[i] = shield;
+                        hero.agility += shield.getAgilityItem();
+                        hero.strength += shield.getStrengthItem();
+                        hero.intellect += shield.getIntellctItem();
+                        break;
+                    case 5:
+                        EmptySlot empty = new EmptySlot();
+                        arritems[i] = empty;
+                        break;
+                }
+            }
         }
     }
     class Teemo : Hero
@@ -147,13 +226,104 @@ namespace GameLegueOfLegend
             base.strikepower = (2D * intellect + 0.97 * agility + 1D * strength);
         }
     }
-    //class Item
-    //{
-    //    protected String name;
-    //    protected int intellect;
-    //    protected int agility;
-    //    protected int strength;
-    //}
+    class Darius : Hero
+    {
+        public Darius()
+        {
+            base.name = "Darius";
+            base.health = 210D;
+            base.intellect = 0D;
+            base.agility = 3D;
+            base.strength = 10D;
+            base.strikepower = (0.95D * intellect + 1.1 * agility + 1.5D * strength);
+        }
+    }
+    class Kayle : Hero
+    {
+        public Kayle()
+        {
+            base.name = "Kayle";
+            base.health = 190D;
+            base.intellect = 15D;
+            base.agility = 5D;
+            base.strength = 3D;
+            base.strikepower = (1.7D * intellect + 1 * agility + 1D * strength);
+        }
+    }
+    class Item
+    {
+        protected String name;
+        protected double intellect;
+        protected double agility;
+        protected double strength;
+
+        public string getNameItem()
+        {
+            return name;
+        }
+        public double getIntellctItem()
+        {
+            return intellect;
+        }
+        public double getAgilityItem()
+        {
+            return agility;
+        }
+        public double getStrengthItem()
+        {
+            return strength;
+        }
+    }
+    class Bow : Item
+    {
+        public Bow()
+        {
+            base.name = "ArowOfShadowPriest";
+            base.intellect = 1D;
+            base.agility = 10D;
+            base.strength = 4D;
+        }
+    }
+    class Sword : Item
+    {
+        public Sword()
+        {
+            base.name = "B.F.Sword";
+            base.intellect = 0D;
+            base.agility = 6D;
+            base.strength = 15D;
+        }
+    }
+    class Staff : Item
+    {
+        public Staff()
+        {
+            base.name = "StaffOfDeath";
+            base.intellect = 20D;
+            base.agility = 0D;
+            base.strength = 0D;
+        }
+    }
+    class Shield : Item
+    {
+        public Shield()
+        {
+            base.name = "ShieldOfGladiator";
+            base.intellect = 0D;
+            base.agility = 10D;
+            base.strength = 15D;
+        }
+    }
+    class EmptySlot : Item
+    {
+        public EmptySlot()
+        {
+            base.name = "EmptySlot";
+            base.intellect = 0D;
+            base.agility = 0D;
+            base.strength = 0D;
+        }
+    }
     class Program
     {
         static void Main()
@@ -161,6 +331,7 @@ namespace GameLegueOfLegend
             Boolean check = true;
             do
             {
+                Console.Clear();
                 Console.WriteLine("Что бы начать игру напиши \"s\", для выхода нажми \"q\"");
                 string inputFromUser = Console.ReadLine();
                 switch (inputFromUser)
