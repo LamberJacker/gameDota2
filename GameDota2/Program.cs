@@ -116,7 +116,7 @@ namespace GameLegueOfLegend
         private Item[] arritems = new Item[2];
         public String getInfo()
         {
-            return name + " : " + Math.Round(health) + " HP";
+            return name + " : " + Math.Round(health, 0, MidpointRounding.AwayFromZero) + " HP";
         }
         public void getAllInfo()
         {
@@ -125,7 +125,7 @@ namespace GameLegueOfLegend
             Console.WriteLine("Характеристики героя: \nЗдоровье : " + health + " HP \nИнтелект: " + intellect);
             Console.WriteLine("Ловкость : " + agility + "\nСила : " + strength);
             Console.WriteLine("--------------------------------------");
-            Console.WriteLine("Сила одного удара равна : " + strikepower);
+            Console.WriteLine("Сила одного удара равна : " + Math.Round(strikepower, 2, MidpointRounding.AwayFromZero));
             Console.WriteLine("--------------------------------------");
             Console.WriteLine("В левой руке у него : " + arritems[0].getNameItem());
             Console.WriteLine("В правой руке у него : " + arritems[1].getNameItem());
